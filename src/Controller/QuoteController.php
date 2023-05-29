@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Api\Services\CallApi as ServicesCallApi;
+use App\Services\CallApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +13,12 @@ class QuoteController extends AbstractController
   
 
     #[Route('/quote', name: 'app_quote')]
-    public function index (ServicesCallApi $serviceCallApi) : Response
+    public function index (CallApi $serviceCallApi) : Response
     {
-        dd($serviceCallApi->getAnimeQuote());
+        $animequote= json_decode($serviceCallApi->getAnimeQuote());
         
         return $this->render('quote/index.html.twig', [
-            'controller_name' => 'QuoteController',
+            'animequote' => $animequote,
         ]);
     }
 }

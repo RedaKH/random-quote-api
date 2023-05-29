@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Services;
+namespace App\Services;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -12,7 +12,7 @@ class CallApi {
         $this->client = $client;
     }
 
-    public function getAnimeQuote(): array
+    public function getAnimeQuote()
     {
         $response = $this->client->request(
             'GET',
@@ -26,7 +26,7 @@ class CallApi {
 
 
         );
-        return $response->toArray(); 
+        return $response->getContent(); 
         
     }
 
